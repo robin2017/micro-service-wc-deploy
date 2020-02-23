@@ -794,7 +794,9 @@ var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_)
 var ipPortReg = /http:\/\/(.*?)\//;
 function getRuntimeBaseUrl() {
   var currentScript = window.document.currentScript;
-  var baseUrl = "";
+  var baseUrl = ""; //这里经常报错，现在排查下
+
+  console.log('antd===getRuntimeBaseUrl===:currentScript', currentScript, currentScript.src);
 
   if (currentScript && currentScript.src) {
     var ret = ipPortReg.exec(currentScript.src);
