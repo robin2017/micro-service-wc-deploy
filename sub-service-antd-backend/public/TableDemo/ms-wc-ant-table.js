@@ -724,12 +724,12 @@ function normalizeComponent (
   }
 }
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"bc33beca-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/modules/TableDemo/Index.vue?vue&type=template&id=73faf7c0&shadow
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"bc33beca-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/modules/TableDemo/Index.vue?vue&type=template&id=2729b8a1&shadow
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('module-header',{attrs:{"content":"antd的table组件"}}),_c('div',{staticStyle:{"margin":"10px"}},[_c('span',[_vm._v("数据来源：")]),_c('span',{staticStyle:{"text-decoration":"underline","color":"blue","cursor":"pointer"},on:{"click":_vm.openUrl}},[_vm._v(_vm._s(_vm.dataUrl))])]),_c('a-table',{attrs:{"columns":_vm.columns,"dataSource":_vm.tableData,"bordered":""},scopedSlots:_vm._u([{key:"name",fn:function(text){return [_c('a',{attrs:{"href":"javascript:;"}},[_vm._v(_vm._s(text))])]}}])})],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/modules/TableDemo/Index.vue?vue&type=template&id=73faf7c0&shadow
+// CONCATENATED MODULE: ./src/modules/TableDemo/Index.vue?vue&type=template&id=2729b8a1&shadow
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"bc33beca-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/common/ModuleHeader.vue?vue&type=template&id=47bfe5ce&scoped=true&
 var ModuleHeadervue_type_template_id_47bfe5ce_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"module-header"},[_c('span',[_vm._v(_vm._s(_vm.content))])])}
@@ -793,10 +793,9 @@ var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_)
 // CONCATENATED MODULE: ./src/http/utils.js
 var ipPortReg = /http:\/\/(.*?)\//;
 function getRuntimeBaseUrl() {
+  //第二次就是null
   var currentScript = window.document.currentScript;
-  var baseUrl = ""; //这里经常报错，现在排查下
-
-  console.log('antd===getRuntimeBaseUrl===:currentScript', currentScript, currentScript.src);
+  var baseUrl = "";
 
   if (currentScript && currentScript.src) {
     var ret = ipPortReg.exec(currentScript.src);
@@ -924,7 +923,17 @@ var renderContent = (value, row, index) => {
 
   computed: {
     dataUrl() {
-      return getRuntimeBaseUrl() + "/ZHTEST/" + host.tableList;
+      var url = getRuntimeBaseUrl() + "/ZHTEST/" + host.tableList;
+      var KEY = 'ant_table';
+      var localUrl = window.localStorage.getItem(KEY);
+
+      if (localUrl) {
+        url = localUrl;
+      } else {
+        window.localStorage.setItem(KEY, url);
+      }
+
+      return url;
     }
 
   },
