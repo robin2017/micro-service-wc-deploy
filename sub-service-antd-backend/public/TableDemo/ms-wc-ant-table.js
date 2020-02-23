@@ -781,10 +781,10 @@ var component = normalizeComponent(
 /* harmony default export */ var ModuleHeader = (component.exports);
 // CONCATENATED MODULE: ./src/http/host.js
 /* harmony default export */ var host = ({
-  personList: 'rest/testController/personList',
+  personList: 'rest/testController/ant_personList',
   hello: 'rest/testController/hello',
-  tableList: 'rest/testController/tableList',
-  treeList: 'rest/testController/treeList'
+  tableList: 'rest/testController/ant_tableList',
+  treeList: 'rest/testController/ant_treeList'
 });
 // EXTERNAL MODULE: external "axios"
 var external_axios_ = __webpack_require__("cebe");
